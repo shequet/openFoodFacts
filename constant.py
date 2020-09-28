@@ -1,11 +1,7 @@
 
 OPENFOODFACTS_URL = 'https://fr.openfoodfacts.org'
 OPENFOODFACTS_PAGE_SIZE = 100
-OPENFOODFACTS_CATEGORIES = ('pates-a-tartiner-aux-noisettes', )
+OPENFOODFACTS_CATEGORIES = ('pates-a-tartiner-aux-noisettes-et-au-cacao', 'sodas-au-cola', 'cremes-fraiches', )
 
-DATABASE_HOST = '127.0.0.1'
-DATABASE_PORT = 5432
-DATABASE_USER = 'postgres'
-DATABASE_PASSWORD = '123456'
-DATABASE_NAME = 'openfoodfact'
-
+LIMIT_CATEGORY_ITEMS = 10
+LIMIT_PRODUCT_ITEMS = 10
