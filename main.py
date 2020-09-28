@@ -1,13 +1,16 @@
 #! /usr/bin/env python3
 # coding: utf-8
 """ OpenFoodFacts project"""
-from openfoodfact import OpenFoodFacts
+from terminaltables import AsciiTable
+
+from lib.terminal import Terminal
 
 
 def main():
     """ Main function """
-    open_food_facts = OpenFoodFacts()
-    open_food_facts.import_category('boissons')
+
+    terminal = Terminal()
+    terminal.first_choice()
 
 
 if __name__ == "__main__":
