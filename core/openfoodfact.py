@@ -18,8 +18,6 @@ class OpenFoodFacts:
     def import_products(self):
         """ Import all products in database"""
 
-        database = Database()
-        database.create_database()
         db_product = Product()
 
         for category in OPENFOODFACTS_CATEGORIES:
