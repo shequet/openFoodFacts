@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 """ OpenFoodFacts project"""
-from lib.openfoodfact import OpenFoodFacts
+from core.openfoodfact import OpenFoodFacts
 
 
 def main():
