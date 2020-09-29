@@ -28,10 +28,10 @@ class Terminal:
         """ First choice"""
 
         if error:
-            print("Veuillez entrer une valeur numérique valide !!!")
+            print("Please enter a valid numeric value !!!")
 
-        print("1) Quel aliment souhaitez-vous remplacer ?")
-        print("2) Retrouver mes aliments substitués.")
+        print("1) What food do you want to replace ?")
+        print("2) Find my substitute foods.")
 
         choice_number = input()
 
@@ -46,8 +46,8 @@ class Terminal:
         """ Categeries choices """
 
         categories = [[
-            'Numéro',
-            'Catégorie'
+            'Number',
+            'Category'
         ]]
         for category in self.category.show():
             categories.append([
@@ -57,8 +57,8 @@ class Terminal:
         print(AsciiTable(categories).table)
 
         if error:
-            print("Veuillez entrer une valeur numérique valide !!!")
-        print("Sélectionnez une catégorie:")
+            print("Please enter a valid numeric value !!!")
+        print("Select a category:")
 
         category_id = input()
 
@@ -78,7 +78,7 @@ class Terminal:
         products = [[
             'Id',
             'Nutri Score',
-            'Nom du produit']]
+            'Product Name']]
 
         for product in categories:
             products.append([
@@ -90,8 +90,8 @@ class Terminal:
         print(AsciiTable(products).table)
 
         if error:
-            print("Veuillez entrer une valeur numérique valide !!!")
-        print("Sélectionnez un aliment:")
+            print("Please enter a valid numeric value !!!")
+        print("Select a food:")
         product_id = input()
 
         if product_id.isdigit():
@@ -111,11 +111,11 @@ class Terminal:
             'Type',
             'Id',
             'Nutri Score',
-            'Marque(s)',
-            'Nom du produit',
-            'Boutique(s)',
-            'lien OpenFoodFacts'], [
-            'Votre produit :',
+            'Brand(s)',
+            'Product Name',
+            'Shop(s)',
+            'OpenFoodFacts Link'], [
+            'Your product :',
             product['id'],
             product['nutriscore_letter'],
             ', '.join([' '.join(brands) for brands in self.product_brand.search_by_product(product_id)]),
@@ -127,7 +127,7 @@ class Terminal:
 
         if substitute_product is not None:
             products.append([
-                'Produit de substitution :',
+                'Substitution product :',
                 substitute_product['id'],
                 substitute_product['nutriscore_letter'],
                 ', '.join(
@@ -138,18 +138,18 @@ class Terminal:
                 '{url}/produit/{code}'.format(url=OPENFOODFACTS_URL, code=substitute_product['code'])])
         else:
             products.append([
-                'Produit de substitution :',
+                'Substitution product :',
                 '-',
                 '-',
                 '-',
-                'Aucun produit trouvé',
+                'No product found',
                 '-',
                 '-'
             ])
 
         print(AsciiTable(products).table)
 
-        print('Voulez-vous enregistrer le substitut ?\n1) Enregsitrer\n*) Autre touche retour au menu de départ')
+        print('Do you want to save the substitute ?\n1) Save\n*) Other key back to the start menu')
         choice = input()
 
         if choice == '1':
@@ -169,10 +169,10 @@ class Terminal:
                 'Type',
                 'Id',
                 'Nutri Score',
-                'Marque(s)',
-                'Nom du produit',
-                'Boutique(s)',
-                'lien OpenFoodFacts']]
+                'Brand(s)',
+                'Product Name',
+                'Shop(s)',
+                'OpenFoodFacts Link']]
 
             product_id = product_substitute[0]
             substitute_id = product_substitute[1]
@@ -181,7 +181,7 @@ class Terminal:
             substitute = self.product.search_by_id(substitute_id)
 
             products.append([
-                'Votre produit :',
+                'Your product :',
                 product['id'],
                 product['nutriscore_letter'],
                 ', '.join([' '.join(brands) for brands in self.product_brand.search_by_product(product_id)]),
@@ -190,7 +190,7 @@ class Terminal:
                 '{url}/produit/{code}'.format(url=OPENFOODFACTS_URL, code=product['code'])])
 
             products.append([
-                'Produit de substitution :',
+                'Substitution product :',
                 substitute['id'],
                 substitute['nutriscore_letter'],
                 ', '.join([' '.join(brands) for brands in self.product_brand.search_by_product(substitute_id)]),
