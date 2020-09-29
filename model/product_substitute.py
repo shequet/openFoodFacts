@@ -28,11 +28,7 @@ class ProductSubstitute(Database):
 
         return self.fetch_all("""
         SELECT
-            c.name
+            ps.product_id,
+            ps.substitute_product_id
         FROM
-            product_categories as pc
-        INNER JOIN
-            categories as c On c.id = pc.category_id
-        WHERE
-            pc.product_id=%s;
-        """, (product_id, ))
+            product_substitute as ps""")
