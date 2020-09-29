@@ -2,14 +2,7 @@
 # coding: utf-8
 """ Database class """
 import mysql.connector
-#from psycopg2 import connect, extensions, errors, sql
 import os
-
-
-class PythonMySQLConverter(mysql.connector.conversion.MySQLConverter):
-
-    def _list_to_mysql(self, value):
-        return ", ".join(value)
 
 
 class Database:
@@ -28,7 +21,6 @@ class Database:
             password='123456',
             database=os.environ.get('DATABASE_NAME', 'openfoodfact')
         )
-        self.conn.set_converter_class(PythonMySQLConverter)
 
     def execute(self, query, params=()):
         """ Execute query in database"""
