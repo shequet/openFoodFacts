@@ -84,7 +84,10 @@ class Terminal:
             products.append([
                 product[0],
                 self.product.decode_nutriscore(int(product[5])),
-                '{name} {quantity}'.format(name=product[2], quantity=product[4])
+                '{name} {quantity}'.format(
+                    name=product[2],
+                    quantity=product[4]
+                )
             ])
 
         print(AsciiTable(products).table)
@@ -107,6 +110,8 @@ class Terminal:
         if product is None:
             self.product_choice(category_id=category_id, error=True)
 
+        product_brands = self.product_brand.search_by_product(product_id)
+        product_stores = self.product_store.search_by_product(product_id)
         products = [[
             'Type',
             'Id',
@@ -118,24 +123,38 @@ class Terminal:
             'Your product :',
             product['id'],
             product['nutriscore_letter'],
-            ', '.join([' '.join(brands) for brands in self.product_brand.search_by_product(product_id)]),
+            ', '.join([' '.join(brands) for brands in product_brands]),
             product['name'],
-            ', '.join([' '.join(stores) for stores in self.product_store.search_by_product(product_id)]),
-            '{url}/produit/{code}'.format(url=OPENFOODFACTS_URL, code=product['code'])]]
+            ', '.join([' '.join(stores) for stores in product_stores]),
+            '{url}/produit/{code}'.format(
+                url=OPENFOODFACTS_URL,
+                code=product['code']
+            )]]
 
-        substitute_product = self.product.search_by_category_best_nutri_score(category_id, product['nutriscore'])
-
+        substitute_product = self.product.search_by_category_best_nutri_score(
+            category_id=category_id,
+            nutri_score=product['nutriscore']
+        )
+        substitute_brands = self.product_brand.search_by_product(
+            product_id=substitute_product['id']
+        )
+        substitute_stores = self.product_store.search_by_product(
+            product_id=substitute_product['id']
+        )
         if substitute_product is not None:
             products.append([
                 'Substitution product :',
                 substitute_product['id'],
                 substitute_product['nutriscore_letter'],
                 ', '.join(
-                    [' '.join(brands) for brands in self.product_brand.search_by_product(substitute_product['id'])]),
+                    [' '.join(brands) for brands in substitute_brands]),
                 substitute_product['name'],
                 ', '.join(
-                    [' '.join(stores) for stores in self.product_store.search_by_product(substitute_product['id'])]),
-                '{url}/produit/{code}'.format(url=OPENFOODFACTS_URL, code=substitute_product['code'])])
+                    [' '.join(stores) for stores in substitute_stores]),
+                '{url}/produit/{code}'.format(
+                    url=OPENFOODFACTS_URL,
+                    code=substitute_product['code']
+                )])
         else:
             products.append([
                 'Substitution product :',
@@ -149,7 +168,9 @@ class Terminal:
 
         print(AsciiTable(products).table)
 
-        print('Do you want to save the substitute ?\n1) Save\n*) Other key back to the start menu')
+        print('Do you want to save the substitute ?')
+        print('1) Save')
+        print('*) Other key back to the start menu')
         choice = input()
 
         if choice == '1':
@@ -180,23 +201,37 @@ class Terminal:
             product = self.product.search_by_id(product_id)
             substitute = self.product.search_by_id(substitute_id)
 
+            product_brands = self.product_brand.search_by_product(product_id)
+            product_stores = self.product_store.search_by_product(product_id)
             products.append([
                 'Your product :',
                 product['id'],
                 product['nutriscore_letter'],
-                ', '.join([' '.join(brands) for brands in self.product_brand.search_by_product(product_id)]),
+                ', '.join([' '.join(brands) for brands in product_brands]),
                 product['name'],
-                ', '.join([' '.join(stores) for stores in self.product_store.search_by_product(product_id)]),
-                '{url}/produit/{code}'.format(url=OPENFOODFACTS_URL, code=product['code'])])
+                ', '.join([' '.join(stores) for stores in product_stores]),
+                '{url}/produit/{code}'.format(
+                    url=OPENFOODFACTS_URL,
+                    code=product['code']
+                )])
 
+            substitute_brands = self.product_brand.search_by_product(
+                product_id=substitute_id
+            )
+            substitute_stores = self.product_store.search_by_product(
+                product_id=substitute_id
+            )
             products.append([
                 'Substitution product :',
                 substitute['id'],
                 substitute['nutriscore_letter'],
-                ', '.join([' '.join(brands) for brands in self.product_brand.search_by_product(substitute_id)]),
+                ', '.join([' '.join(brands) for brands in substitute_brands]),
                 substitute['name'],
-                ', '.join([' '.join(stores) for stores in self.product_store.search_by_product(substitute_id)]),
-                '{url}/produit/{code}'.format(url=OPENFOODFACTS_URL, code=substitute['code'])])
+                ', '.join([' '.join(stores) for stores in substitute_stores]),
+                '{url}/produit/{code}'.format(
+                    url=OPENFOODFACTS_URL,
+                    code=substitute['code']
+                )])
 
             print(AsciiTable(products).table)
         self.first_choice()

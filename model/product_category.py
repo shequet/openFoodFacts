@@ -51,5 +51,3 @@ class ProductCategory(Database):
         WHERE
             pc.product_id=%s;
         """, (product_id, ))
-
-

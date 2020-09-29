@@ -25,7 +25,15 @@ class Product(Database):
         self.product_store = ProductStore()
         self.product_substitute = ProductSubstitute()
 
-    def add(self, name, link, quantity, categories, code, stores, brands, nutriscore):
+    def add(self,
+            name,
+            link,
+            quantity,
+            categories,
+            code,
+            stores,
+            brands,
+            nutriscore):
         """ Add product"""
 
         product = self.search_by_code(code)
@@ -94,7 +102,8 @@ class Product(Database):
         """.format(limit=LIMIT_PRODUCT_ITEMS), (category_id, ))
 
     def search_by_category_best_nutri_score(self, category_id, nutri_score):
-        """ Look for the product that has the best nutriscore in its category """
+        """ Look for the product that has
+        the best nutriscore in its category """
 
         product = self.fetch_one("""
             SELECT

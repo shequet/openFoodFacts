@@ -3,7 +3,9 @@
 """ OpenFoodFacts class """
 import requests
 
-from constant import OPENFOODFACTS_URL, OPENFOODFACTS_CATEGORIES, OPENFOODFACTS_PAGE_SIZE
+from constant import OPENFOODFACTS_URL,\
+    OPENFOODFACTS_CATEGORIES,\
+    OPENFOODFACTS_PAGE_SIZE
 from model.database import Database
 from model.product import Product
 from model.brand import Brand
@@ -21,7 +23,9 @@ class OpenFoodFacts:
         db_product = Product()
 
         for category in OPENFOODFACTS_CATEGORIES:
-            products = self.call_api('{url}/categorie/{category}.json'.format(url=self.url, category=category))
+            products = self.call_api('{url}/categorie/{category}.json'.format(
+                url=self.url,
+                category=category))
 
             for product in products:
                 if 'product_name_fr' in product \
@@ -43,12 +47,22 @@ class OpenFoodFacts:
     def call_api(self, url, page=1, products=[]):
         """ Call Api open food facts"""
 
-        r = requests.get(url, params={'page': page, 'page_size': OPENFOODFACTS_PAGE_SIZE})
+        r = requests.get(
+            url,
+            params={
+                'page': page,
+                'page_size': OPENFOODFACTS_PAGE_SIZE
+            })
         if r.status_code == 200 and r.json is not None:
             data = r.json()
             if len(data['products']) > 0:
                 products.extend(data['products'])
-                print('-----Page:[{page}]-----Total products:[{products}]-----'.format(page=page, products=len(products)))
-                return self.call_api(url=url, page=int(data['page']) + 1, products=products)
+                print('--Page:[{page}]--Total products:[{products}]--'.format(
+                    page=page,
+                    products=len(products)))
+                return self.call_api(
+                    url=url,
+                    page=int(data['page']) + 1,
+                    products=products)
 
         return products
