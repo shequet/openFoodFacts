@@ -9,8 +9,7 @@ from core.terminal import Terminal
 def main():
     """ Main function """
 
-    terminal = Terminal()
-    terminal.first_choice()
+    Terminal()
 
 
 if __name__ == "__main__":
