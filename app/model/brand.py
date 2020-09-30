@@ -1,56 +1,54 @@
 #! /usr/bin/env python3
 # coding: utf-8
-""" Category class """
-from model.database import Database
-from constant import LIMIT_CATEGORY_ITEMS
+""" Brand class """
+from app.database import Database
 
 
-class Category(Database):
-    """ Category class"""
+class Brand(Database):
+    """ Brand class"""
 
     def __init__(self):
         super().__init__()
 
     def add(self, name):
-        """ Add category"""
+        """ Add brand"""
 
-        category = self.search_by_name(name)
+        brand = self.search_by_name(name)
 
-        if category is None:
+        if brand is None:
             self.execute("""
             INSERT INTO
-                categories(
+                brands(
                     name
-                    ) VALUES (
+                    )VALUES (
                     %s
                     )
             """, (name, ))
             return self.search_by_name(name)[0]
         else:
-            return category[0]
+            return brand[0]
 
     def search_by_name(self, name):
-        """ Search category by name """
+        """ Search brand by name"""
 
         return self.fetch_one("""
         SELECT
             *
         FROM
-            categories
+            brands
         WHERE
             name=%s;
         """, (name,))
 
     def show(self):
-        """ Show categories """
+        """ Show brands"""
 
         return self.fetch_all("""
         SELECT
             id,
             name
         FROM
-            categories
+            brands
         ORDER BY
-            id ASC
-        LIMIT {limit}
-        """.format(limit=LIMIT_CATEGORY_ITEMS, ))
+            name ASC
+        """)

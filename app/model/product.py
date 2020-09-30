@@ -1,14 +1,14 @@
 #! /usr/bin/env python3
 # coding: utf-8
 """ Product class """
-from model.database import Database
-from model.category import Category
-from model.product_category import ProductCategory
-from model.brand import Brand
-from model.store import Store
-from model.product_brand import ProductBrand
-from model.product_store import ProductStore
-from model.product_substitute import ProductSubstitute
+from app.database import Database
+from app.model.category import Category
+from app.model.product_category import ProductCategory
+from app.model.brand import Brand
+from app.model.store import Store
+from app.model.product_brand import ProductBrand
+from app.model.product_store import ProductStore
+from app.model.product_substitute import ProductSubstitute
 from constant import LIMIT_PRODUCT_ITEMS
 
 

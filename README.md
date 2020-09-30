@@ -18,7 +18,7 @@ The script works on Windows, Mac and Linux, however it is necessary to have Pyth
 |  DATABASE_PASSWORD |  Password | 123456 |
 |  DATABASE_NAME |  Name of the database | openfoodfact |
 
-- Run the SQL script used to create the database as well as the tables, file at the root of the project ``create_database.sql``
+- Run the SQL script used to create the database as well as the tables, SQL file ``install/create_database.sql``
 
 #### Settings before data import
 You can configure the categories to import from the openFoodFacts API from the file ``constant.py``

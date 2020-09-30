@@ -3,7 +3,7 @@
 """ OpenFoodFacts project"""
 from terminaltables import AsciiTable
 
-from core.terminal import Terminal
+from app.terminal import Terminal
 
 
 def main():

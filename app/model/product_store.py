@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 """ product Store class """
-from model.database import Database
+from app.database import Database
 
 
 class ProductStore(Database):
