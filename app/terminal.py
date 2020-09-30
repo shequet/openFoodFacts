@@ -4,12 +4,12 @@
 from terminaltables import AsciiTable
 
 from constant import OPENFOODFACTS_URL
-from model.category import Category
-from model.product import Product
-from model.product_category import ProductCategory
-from model.product_brand import ProductBrand
-from model.product_store import ProductStore
-from model.product_substitute import ProductSubstitute
+from app.model.category import Category
+from app.model.product import Product
+from app.model.product_category import ProductCategory
+from app.model.product_brand import ProductBrand
+from app.model.product_store import ProductStore
+from app.model.product_substitute import ProductSubstitute
 
 
 class Terminal:

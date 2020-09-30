@@ -6,9 +6,9 @@ import requests
 from constant import OPENFOODFACTS_URL,\
     OPENFOODFACTS_CATEGORIES,\
     OPENFOODFACTS_PAGE_SIZE
-from model.database import Database
-from model.product import Product
-from model.brand import Brand
+from app.database import Database
+from app.model.product import Product
+from app.model.brand import Brand
 
 
 class OpenFoodFacts:
