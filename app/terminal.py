@@ -174,13 +174,10 @@ class Terminal:
         choice = input()
 
         if choice == '1':
-            self.substitute_save(product_id, substitute_product['id'])
+            self.product_substitute.add(
+                product_id=product_id,
+                substitute_product_id=substitute_product['id'])
         self.first_choice()
-
-    def substitute_save(self, product_id, substitute_product_id):
-        """ Substitute Save"""
-
-        self.product_substitute.add(product_id, substitute_product_id)
 
     def substitute_choice(self):
         """ Substitute choice"""

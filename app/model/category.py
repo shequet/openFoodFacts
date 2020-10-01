@@ -50,8 +50,6 @@ class Category(Database):
             name
         FROM
             categories
-        WHERE
-            id IN (113, 6, 141, 198)
         ORDER BY
             id ASC
         LIMIT {limit}
