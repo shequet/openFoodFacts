@@ -13,15 +13,30 @@ class ProductSubstitute(Database):
     def add(self, product_id, substitute_product_id):
         """ Add product substitute"""
 
-        self.execute("""
-        INSERT INTO
-            product_substitute(
-                product_id,
-                substitute_product_id
-            ) VALUES (
-                %s,
-                %s)
-        """, (product_id, substitute_product_id, ))
+        if self.search(product_id, substitute_product_id) is None:
+            self.execute("""
+            INSERT INTO
+                product_substitute(
+                    product_id,
+                    substitute_product_id
+                ) VALUES (
+                    %s,
+                    %s)
+            """, (product_id, substitute_product_id, ))
+
+    def search(self, product_id, substitute_product_id):
+        """ Search product substitute by product id and substitute product id"""
+
+        return self.fetch_one("""
+        SELECT
+            *
+        FROM
+            product_substitute
+        WHERE
+            product_id=%s
+        AND
+            substitute_product_id=%s;
+        """, (product_id, substitute_product_id))
 
     def select_all(self):
         """ Select all substitute"""
