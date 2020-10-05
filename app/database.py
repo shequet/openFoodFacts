@@ -13,7 +13,7 @@ class Database:
             host=os.environ.get('DATABASE_HOST', '127.0.0.1'),
             user=os.environ.get('DATABASE_USER', 'root'),
             port=os.environ.get('DATABASE_PORT', 3306),
-            password='123456',
+            password=os.environ.get('DATABASE_PASSWORD', '123456'),
             database=os.environ.get('DATABASE_NAME', 'openfoodfact')
         )
         self.conn.autocommit = True
